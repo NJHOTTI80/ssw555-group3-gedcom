@@ -1,4 +1,10 @@
 
+/**
+ * Errors are a type of problem that represent 
+ * conditions that cannot occur in a family
+ * tree.
+ *
+ */
 public class Error extends Problem {
 
 	public Error(int lineNum, String msg) {

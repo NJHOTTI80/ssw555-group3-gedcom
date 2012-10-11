@@ -1,6 +1,10 @@
 import java.util.Vector;
 
 
+/**
+ * This is the list of all problems in a gedcom file.
+ *
+ */
 public class ProblemList {
 
 	ProblemList() {
