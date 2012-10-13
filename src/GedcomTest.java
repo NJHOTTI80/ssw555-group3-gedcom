@@ -61,7 +61,7 @@ public class GedcomTest {
 		
 		assertEquals(3, t1.getChildSize()); //family 0 has 3 kids
 		assertEquals(1, t2.getChildSize()); //family 1 has 1 kid
-		assertEquals("I0", t1.getHusb()); //I0 is the husband of family 1
+		assertEquals("I0", t1.getHusb()); //I0 is the husband of family 0
 		assertEquals("I5", t2.getWife()); //I5 is the wife of family 1
 		assertEquals(null, t1.getDD()); //Family 0 never divorced
 		assertTrue(t1.getMD().after(t2.getMD())); //family 0 married after family 1 did
