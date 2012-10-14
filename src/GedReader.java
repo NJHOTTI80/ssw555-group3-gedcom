@@ -78,7 +78,6 @@ public class GedReader {
 						}
 					}
 				}
-				placeChildren();
 			}
 		} catch(FileNotFoundException e){
 			System.out.println("The file provided was invalid.");
@@ -200,20 +199,5 @@ public class GedReader {
 		return 1; //Default to January if invalid month provided.
 	}
 	
-	public void placeChildren(){
-		int i;
-		int j;
-		String curperson;
-		String curfam;
-		
-		for(i = 0; i < listOfFams.size(); i++){
-			curfam = listOfFams.elementAt(i);
-			for(j = 0; j < listOfPeople.size(); j++){
-				curperson = listOfPeople.elementAt(j);
-				if(personIndex.get(curperson).getFamC().contains(curfam) && !(familyIndex.get(curfam).getChildren().contains(curperson)))
-					familyIndex.get(curfam).addChild(curperson);
-			}
-		}
-	}
 }
 
