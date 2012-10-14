@@ -72,12 +72,12 @@ public class GedReader {
 								}
 							}
 						}
-						else{
-							if(parseInd == true)
-								addIndData(line, curI);
-							else if(parseFam == true)
-								addFamData(line, curF);
-						}
+					}
+					else{
+						if(parseInd == true)
+							addIndData(line, curI);
+						else if(parseFam == true)
+							addFamData(line, curF);
 					}
 				}
 			}
