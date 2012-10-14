@@ -40,7 +40,7 @@ public class Individual
 		return this.sex;
 	}
 	
-	public void setSet(String sex)
+	public void setSex(String sex)
 	{
 		this.sex = sex;
 	}

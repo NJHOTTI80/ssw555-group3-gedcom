@@ -31,7 +31,46 @@ public class GedcomTest {
 		assertTrue(s.contains("married to sibling"));
 		assertTrue(s.contains("invalid tag"));
 	}
-	
+	@Test
+	public void testIndividualDataStructure()
+	{
+		Individual i1 = new Individual("@I0@");
+		Individual i2 = new Individual("@I1@");
+		
+		GregorianCalendar birthDate1 = new GregorianCalendar();
+		GregorianCalendar birthDate2 = new GregorianCalendar();
+		GregorianCalendar deathDate1 = new GregorianCalendar();	
+		GregorianCalendar deathDate1a = new GregorianCalendar();	
+		birthDate1.set(1940, 10, 24);
+		birthDate2.set(1960, 5, 30);
+		deathDate1.set(2004, 8, 12);
+		deathDate1a.set(2004, 8, 13);
+		
+		i1.setName("Marie Louisee");
+		i1.setSex("F");
+		i1.setBirthDate(birthDate1);
+		i1.addDeathDate(deathDate1);
+		i1.addDeathDate(deathDate1a);
+		i1.addFamS("@F0@");
+		i1.addFamS("@F1@");
+		i1.addFamC("@F3@");
+		
+		i2.setName("John Smith");
+		i2.setSex("M");
+		i2.setBirthDate(birthDate2);
+		i2.addFamC("@F0@");
+		
+		assertEquals(2, i1.getDeathDates().size());
+		assertEquals("John Smith", i2.getName());
+		assertEquals("F", i1.getSex());
+		GregorianCalendar test = new GregorianCalendar();
+		test.set(1960, 5, 30);
+		assertEquals(test, i2.getBirthDate());
+		assertTrue(i1.getFamS().contains("@F0@"));
+		assertTrue(i2.getFamC().contains("@F0@"));
+		assertTrue(i1 != i2);
+		
+	}
 	@Test
 	public void testFamilyDataStructure()
 	{

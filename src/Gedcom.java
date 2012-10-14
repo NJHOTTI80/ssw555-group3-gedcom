@@ -1,7 +1,32 @@
+import java.io.File;
+
 
 public class Gedcom {
 
 	public static void main(String args[]) {
-		System.out.println("enter gedcom input file");
+		if(args.length != 1)
+		{
+			System.out.println("Please enter exactly 1 GEDCOM File");
+		}
+		else
+		{
+			String fileName = args[0];
+			if(!fileName.endsWith(".ged"))
+			{
+				System.out.println("Please enter a file ending in \".ged\"");
+			}
+			else
+			{
+				File file = new File(fileName);
+				if(!file.exists())
+				{
+					System.out.println("File '"+fileName+"' can't be found or doesn't exist");
+				}
+				else
+				{
+					//MAIN CODE
+				}
+			}			
+		}
 	}
 }
