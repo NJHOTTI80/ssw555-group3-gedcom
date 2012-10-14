@@ -24,7 +24,10 @@ public class Gedcom {
 				}
 				else
 				{
-					//MAIN CODE
+					GedReader parser = new GedReader();
+					parser.readGED(file);
+					System.out.println("File parsed!"); //General output, will be replaced in sprint 2.
+					//Find errors and anomalies. (Starting in sprint 2)
 				}
 			}			
 		}

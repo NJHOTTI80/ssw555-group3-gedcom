@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.Hashtable;
 import java.util.GregorianCalendar;
 import java.lang.Integer;
+import java.util.Vector;
 
 public class GedReader {
 	private boolean birthD = false;
@@ -17,52 +18,64 @@ public class GedReader {
 	private boolean marrD = false;
 	private boolean divD = false;
 	private Hashtable<String, Family> familyIndex;
+	private Hashtable<String, Individual> personIndex;
+	private Vector<String> listOfPeople;
+	private Vector<String> listOfFams;
 	
-	public void readGED(String filename){
+	public GedReader(){
+		familyIndex = new Hashtable<String, Family>(50);
+		personIndex = new Hashtable<String, Individual>(200);
+		listOfPeople = new Vector<String>(200);
+		listOfFams = new Vector<String>(50);
+	}
+	
+	public void readGED(File input){
 		String line;
-		File input;
 		Scanner rf;
 		String id;
 		Family curF = null;
+		Individual curI = null;
 		boolean parseInd = false;
 		boolean parseFam = false;
-		familyIndex = new Hashtable<String, Family>(50);
 		
 		try{
-			input = new File(filename);
 			if(input != null)
 			{
 				rf = new Scanner(input);
 				while(rf.hasNextLine()){
 					line = rf.nextLine();
-					if(line.charAt(0) == '0')
-					{
-						if(parseInd == true){
-							//Enter curIndividual in the hashtable, set flag to false
-							parseInd = false;
+					if(line.length() > 0){
+						if(line.charAt(0) == '0')
+						{
+							if(parseInd == true){
+								personIndex.put(curI.getId(), curI);
+								parseInd = false;
+							}
+							else if(parseFam == true){
+								familyIndex.put(curF.getID(), curF);
+								parseFam = false;
+							}
+							if(line.indexOf("FAM") != -1){
+								parseFam = true;
+								parseInd = false;
+								id = parseID(line);
+								curF = new Family(id);
+								listOfFams.add(id);
+							}
+							else if(line.indexOf("INDI") != -1){
+								parseInd = true;
+								parseFam = false;
+								id = parseID(line);
+								curI = new Individual(id);
+								listOfPeople.add(id);
+							}
 						}
-						else if(parseFam == true){
-							familyIndex.put(curF.getID(), curF);
-							parseFam = false;
+						else{
+							if(parseInd == true)
+								addIndData(line, curI);
+							else if(parseFam == true)
+								addFamData(line, curF);
 						}
-						if(line.indexOf("FAM") != -1){
-							parseFam = true;
-							parseInd = false;
-							id = parseID(line);
-							curF = new Family(id);
-						}
-						else if(line.indexOf("INDI") != -1){
-							parseInd = true;
-							parseFam = false;
-							id = parseID(line);
-							//Create new individual
-						}
-					}
-					else{
-						if(parseInd == true)
-							addIndData(line);
-						else if(parseFam == true)
-							addFamData(line, curF);
 					}
 				}
 				placeChildren();
@@ -88,26 +101,41 @@ public class GedReader {
 		return found;
 	}
 	
-	public void addIndData(String entry){
+	public void addIndData(String entry, Individual cur){
 		String delim = "[ ]+";
 		String[] tokens = entry.split(delim);
 		String tag = tokens[1];
+		String name = "";
+		int i;
+		int month;
 		
 		if(tag.equalsIgnoreCase("NAME")){
-			//Add name to an existing Individual object
+			for(i = 2; i < tokens.length; i++)
+				name = name + tokens[i];
+			cur.setName(name);
 		}else if(tag.equalsIgnoreCase("SEX")){
-			//Add gender to an existing Individual object
+			cur.setSex(tokens[2]);
 		}else if(tag.equalsIgnoreCase("BIRT")){
 			birthD = true;
 		}else if(tag.equalsIgnoreCase("DEAT")){
 			deathD = true;
 		}else if(tag.equalsIgnoreCase("FAMC")){
-			//Add FamC ID to an existing individual object
+			cur.addFamC(tokens[2]);
 		}else if(tag.equalsIgnoreCase("FAMS")){
-			//Add FamS ID to an existing individual object
+			cur.addFamS(tokens[2]);
 		}else if(tag.equalsIgnoreCase("DATE")){
-			//Add either Birthday or Deathday to an existing individual object
-			//depending on active flag.
+			if(tokens.length > 3){
+				month = getMonth(tokens[3]);
+				GregorianCalendar m = new GregorianCalendar(Integer.parseInt(tokens[2]), month, Integer.parseInt(tokens[4]));
+				if(birthD == true){
+					birthD = false;
+					cur.setBirthDate(m);
+				}
+				else if(deathD == true){
+					deathD = false;
+					cur.addDeathDate(m);
+				}	
+			}
 		}
 	}
 	
@@ -129,30 +157,7 @@ public class GedReader {
 			divD = true;
 		}else if(tag.equalsIgnoreCase("DATE")){
 			if(tokens.length > 3){
-				if(tokens[3].equalsIgnoreCase("JAN"))
-					month = 1;
-				else if(tokens[3].equalsIgnoreCase("FEB"))
-					month = 2;
-				else if(tokens[3].equalsIgnoreCase("MAR"))
-					month = 3;
-				else if(tokens[3].equalsIgnoreCase("APR"))
-					month = 4;
-				else if(tokens[3].equalsIgnoreCase("MAY"))
-					month = 5;
-				else if(tokens[3].equalsIgnoreCase("JUN"))
-					month = 6;
-				else if(tokens[3].equalsIgnoreCase("JUL"))
-					month = 7;
-				else if(tokens[3].equalsIgnoreCase("AUG"))
-					month = 8;
-				else if(tokens[3].equalsIgnoreCase("SEP"))
-					month = 9;
-				else if(tokens[3].equalsIgnoreCase("OCT"))
-					month = 10;
-				else if(tokens[3].equalsIgnoreCase("NOV"))
-					month = 11;
-				else if(tokens[3].equalsIgnoreCase("DEC"))
-					month = 12;
+				month = getMonth(tokens[3]);
 				GregorianCalendar m = new GregorianCalendar(Integer.parseInt(tokens[2]), month, Integer.parseInt(tokens[4]));
 				if(marrD == true){
 					marrD = false;
@@ -166,8 +171,49 @@ public class GedReader {
 		}
 	}
 	
+	public int getMonth(String month)
+	{
+		if(month.equalsIgnoreCase("JAN"))
+			return 1;
+		else if(month.equalsIgnoreCase("FEB"))
+			return 2;
+		else if(month.equalsIgnoreCase("MAR"))
+			return 3;
+		else if(month.equalsIgnoreCase("APR"))
+			return 4;
+		else if(month.equalsIgnoreCase("MAY"))
+			return 5;
+		else if(month.equalsIgnoreCase("JUN"))
+			return 6;
+		else if(month.equalsIgnoreCase("JUL"))
+			return 7;
+		else if(month.equalsIgnoreCase("AUG"))
+			return 8;
+		else if(month.equalsIgnoreCase("SEP"))
+			return 9;
+		else if(month.equalsIgnoreCase("OCT"))
+			return 10;
+		else if(month.equalsIgnoreCase("NOV"))
+			return 11;
+		else if(month.equalsIgnoreCase("DEC"))
+			return 12;
+		return 1; //Default to January if invalid month provided.
+	}
+	
 	public void placeChildren(){
+		int i;
+		int j;
+		String curperson;
+		String curfam;
 		
+		for(i = 0; i < listOfFams.size(); i++){
+			curfam = listOfFams.elementAt(i);
+			for(j = 0; j < listOfPeople.size(); j++){
+				curperson = listOfPeople.elementAt(j);
+				if(personIndex.get(curperson).getFamC().contains(curfam) && !(familyIndex.get(curfam).getChildren().contains(curperson)))
+					familyIndex.get(curfam).addChild(curperson);
+			}
+		}
 	}
 }
 
