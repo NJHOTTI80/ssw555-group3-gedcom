@@ -47,27 +47,29 @@ public class GedReader {
 					if(line.length() > 0){
 						if(line.charAt(0) == '0')
 						{
-							if(parseInd == true){
-								personIndex.put(curI.getId(), curI);
-								parseInd = false;
-							}
-							else if(parseFam == true){
-								familyIndex.put(curF.getID(), curF);
-								parseFam = false;
-							}
-							if(line.indexOf("FAM") != -1){
-								parseFam = true;
-								parseInd = false;
-								id = parseID(line);
-								curF = new Family(id);
-								listOfFams.add(id);
-							}
-							else if(line.indexOf("INDI") != -1){
-								parseInd = true;
-								parseFam = false;
-								id = parseID(line);
-								curI = new Individual(id);
-								listOfPeople.add(id);
+							if(line.indexOf("FAM") != -1 || line.indexOf("INDI") != -1){
+								if(parseInd == true){
+									personIndex.put(curI.getId(), curI);
+									parseInd = false;
+								}
+								else if(parseFam == true){
+									familyIndex.put(curF.getID(), curF);
+									parseFam = false;
+								}
+								if(line.indexOf("FAM") != -1){
+									parseFam = true;
+									parseInd = false;
+									id = parseID(line);
+									curF = new Family(id);
+									listOfFams.add(id);
+								}
+								else if(line.indexOf("INDI") != -1){
+									parseInd = true;
+									parseFam = false;
+									id = parseID(line);
+									curI = new Individual(id);
+									listOfPeople.add(id);
+								}
 							}
 						}
 						else{
