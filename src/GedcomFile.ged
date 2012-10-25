@@ -172,3 +172,45 @@
 2 DATE 6 JUL 1750
 1 _CURRENT N
 0 TRLR
+
+0 NOTE there is an example for M classified as wife or F classified as husband but with wrong tags so idk how it will work
+0 @I100@ INDI
+1 NAME Alice /Carter/
+1 SEX F
+1 BIRT
+2 DATE 7 APR 1949
+1 FAMS @F100@
+0 @I101@ INDI
+1 NAME Bob /Carter/
+1 SEX M
+1 BIRT
+2 DATE 27 APR 1949
+1 FAMS @F100@
+0 @F100@ FAM
+1 HUSB @I100@
+1 WIFE @I101@
+1 CHIL @I102@
+1 CHIL @I103@
+1 MARR
+2 DATE 8 SEP 1969
+
+0 NOTE this is an example of a marriage to a sibiling
+0 @I102@ INDI
+1 NAME Jane /Carter/
+1 SEX F
+1 BIRT
+2 DATE 7 MAR 1963
+1 FAMS @F101@
+1 FAMC @F100@
+0 @I103@ INDI
+1 NAME John /Carter/
+1 SEX M
+1 BIRT
+2 DATE 27 DEC 1965
+1 FAMS @F101@
+1 FAMC @F100@
+0 @F101@ FAM
+1 HUSB @I103@
+1 WIFE @I102@
+1 MARR
+2 DATE 8 SEP 1988
