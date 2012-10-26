@@ -108,5 +108,34 @@ public class GedcomTest {
 		assertTrue(t1c.contains("I2")); //I2 is one of the children of family 0
 		assertTrue(t1.getID() != t2.getID()); //family 0 and family 1 are two different families.
 	}
+	
+	@Test
+	public void testAnomalyWhenIndMarriedToMoreThanOnePerson() {
+		Individual i1 = new Individual("1");
+		Individual i2 = new Individual("2");
+		Individual i3 = new Individual("3");
+		
+		i1.setSpouse(i2, new GregorianCalendar(2012, 6, 5));
+		
+		i1.setSpouse(i3, new GregorianCalendar(2012, 4, 3));
+		
+		assertTrue( i1.isMarriedToMoreThanOnePerson() );
+		assertTrue( !i3.isMarriedToMoreThanOnePerson() );
+	}
+	
+	@Test
+	public void testWhenBirthdateLaterThanDeathDate() {
+		Individual i1 = new Individual("1");
+		Individual i2 = new Individual("2");
+		
+		i1.setBirthDate(new GregorianCalendar(1950, 10, 31));
+		i2.setBirthDate(new GregorianCalendar(1950, 10, 31));
+		
+		i1.addDeathDate(new GregorianCalendar(1920, 10, 31));
+		i2.addDeathDate(new GregorianCalendar(1990, 10, 31));
+		
+		assertTrue( i1.isBirthDateAfterDeathDate() );
+		assertTrue( !i2.isBirthDateAfterDeathDate() );
+	}
 
 }
