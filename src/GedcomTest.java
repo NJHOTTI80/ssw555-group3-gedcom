@@ -126,7 +126,6 @@ public class GedcomTest {
 	
 	@Test
 	public void testWhenBirthdateLaterThanDeathDate() {
-		ProblemFinder pf = new ProblemFinder();
 		Individual i1 = new Individual("1");
 		Individual i2 = new Individual("2");
 		
@@ -136,8 +135,8 @@ public class GedcomTest {
 		i1.addDeathDate(new GregorianCalendar(1920, 10, 31));
 		i2.addDeathDate(new GregorianCalendar(1990, 10, 31));
 		
-		assertTrue( pf.isBirthDateAfterDeathDate(i2) );
-		assertTrue( !pf.isBirthDateAfterDeathDate(i2) );
+		assertTrue( ProblemFinder.isBirthDateAfterDeathDate(i1) );
+		assertTrue( !ProblemFinder.isBirthDateAfterDeathDate(i2) );
 	}
 
 	@Test

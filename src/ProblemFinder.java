@@ -1,3 +1,5 @@
+import java.util.GregorianCalendar;
+
 //Evaluates whether there is an issue with a given family or individual
 
 public class ProblemFinder {
@@ -7,7 +9,12 @@ public class ProblemFinder {
 		pl = new ProblemList();
 	}
 	
-	public boolean isBirthDateAfterDeathDate(Individual i){
+	public static boolean isBirthDateAfterDeathDate(Individual i){
+		for ( GregorianCalendar g : i.getDeathDates() ) {
+			if ( i.getBirthDate().after(g) ) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -15,7 +22,7 @@ public class ProblemFinder {
 		return false;
 	}
 	
-	public boolean isMarriedToMoreThanOnePerson(Individual i){
+	public static boolean isMarriedToMoreThanOnePerson(Individual i){
 		return false;
 	}
 	

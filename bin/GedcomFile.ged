@@ -130,7 +130,6 @@
 1 DEAT Y
 2 DATE 18 JUL 1760
 1 FAMS @F4@
-1 FAMS @F9@
 0 NOTE Mystia married her brother in F8
 0 @I12@ INDI
 1 NAME Mystia Kurama /Prismriver/
@@ -210,7 +209,6 @@
 2 DATE 20 APR 1780
 1 FAMC @F7@
 0 NOTE Lily was born in the future (compared to current day), after her parent's death
-0 NOTE Lily married in the future, to her father, after his death.
 0 @I18@ INDI
 1 NAME Lily /Meiling/
 2 GIVN Lily
@@ -222,7 +220,6 @@
 1 DEAT Y
 2 DATE 25 DEC 2014
 1 FAMC @F4@
-1 FAMS @F9@
 0 @F1@ FAM
 1 HUSB @I5@
 1 WIFE @I1@
@@ -280,11 +277,6 @@
 1 WIFE @I12@
 1 MARR
 2 DATE 22 JUN 1760
-0 @F9@ FAM
-1 HUSB @I11@
-1 WIFE @I18@
-1 MARR 
-2 DATE 22 JUN 2013
 
 
 0 NOTE there is an example for M classified as wife or F classified as husband but with wrong tags so idk how it will work

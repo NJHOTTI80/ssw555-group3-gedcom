@@ -42,6 +42,7 @@ public class GedReader {
 			if(input != null)
 			{
 				rf = new Scanner(input);
+				int lineNumber = 1;
 				while(rf.hasNextLine()){
 					line = rf.nextLine();
 					if(line.length() > 0){
@@ -60,14 +61,14 @@ public class GedReader {
 									parseFam = true;
 									parseInd = false;
 									id = parseID(line);
-									curF = new Family(id);
+									curF = new Family(id, lineNumber);
 									listOfFams.add(id);
 								}
 								else if(line.indexOf("INDI") != -1){
 									parseInd = true;
 									parseFam = false;
 									id = parseID(line);
-									curI = new Individual(id);
+									curI = new Individual(id, lineNumber);
 									listOfPeople.add(id);
 								}
 							}
@@ -78,11 +79,35 @@ public class GedReader {
 								addFamData(line, curF);
 						}
 					}
+					lineNumber++;
 				}
 			}
 		} catch(FileNotFoundException e){
 			System.out.println("The file provided was invalid.");
 		}
+	}
+	
+	public ProblemList findProblems() {
+		ProblemList pl = new ProblemList();
+		
+		// loop through each person and check for each kind of problem that can occur
+		// in an individual
+		for ( String s : personIndex.keySet() ) {
+			if ( ProblemFinder.isBirthDateAfterDeathDate( personIndex.get(s) )) {
+				pl.add( new Error( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " has a birthdate that occurs later than their death date."));
+			}
+			
+			if ( ProblemFinder.isMarriedToMoreThanOnePerson( personIndex.get(s) )) {
+				pl.add( new Error( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to more than 1 indivudal at a time."));
+			}
+		}
+		
+		
+		//loop through each family and check for each problem that can occur in a family
+		
+		
+		
+		return pl;
 	}
 	
 	public String parseID(String entry){

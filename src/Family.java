@@ -16,6 +16,7 @@ public class Family {
 	private String wife;
 	private GregorianCalendar married;
 	private GregorianCalendar divorced;
+	private int lineNumber;
 	
 	public Family(String id)
 	{
@@ -23,6 +24,16 @@ public class Family {
 		children = new Vector<String>();
 		married = null;
 		divorced = null;
+		setLineNumber(0);
+	}
+	
+	public Family(String id, int LineNum)
+	{
+		famID = id;
+		children = new Vector<String>();
+		married = null;
+		divorced = null;
+		setLineNumber(LineNum);
 	}
 	
 	public void addChild(String cID)
@@ -83,5 +94,13 @@ public class Family {
 	public String getID()
 	{
 		return famID;
+	}
+	
+	public int getLineNumber() {
+		return lineNumber;
+	}
+	
+	public void setLineNumber(int lineNum) {
+		this.lineNumber = lineNum;
 	}
 }

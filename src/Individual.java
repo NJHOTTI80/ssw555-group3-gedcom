@@ -12,6 +12,7 @@ public class Individual
 	private ArrayList<GregorianCalendar> deathDates;
 	private HashSet<String> famS;
 	private HashSet<String> famC;
+	private int lineNumber;
 	
 	public Individual(String id)
 	{
@@ -19,6 +20,16 @@ public class Individual
 		this.deathDates = new ArrayList<GregorianCalendar>();
 		this.famS = new HashSet<String>();
 		this.famC = new HashSet<String>();
+		setLineNumber(0);
+	}
+	
+	public Individual(String id, int lineNumber)
+	{
+		this.id = id;
+		this.deathDates = new ArrayList<GregorianCalendar>();
+		this.famS = new HashSet<String>();
+		this.famC = new HashSet<String>();
+		setLineNumber(lineNumber);
 	}
 	
 	public String getId()
@@ -82,6 +93,14 @@ public class Individual
 	public void addFamC(String famC)
 	{
 		this.famC.add(famC);
+	}
+
+	public int getLineNumber() {
+		return lineNumber;
+	}
+	
+	public void setLineNumber(int lineNum) {
+		this.lineNumber = lineNum;
 	}
 	
 	

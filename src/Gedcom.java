@@ -26,8 +26,14 @@ public class Gedcom {
 				{
 					GedReader parser = new GedReader();
 					parser.readGED(file);
-					System.out.println("File parsed!"); //General output, will be replaced in sprint 2.
-					//Find errors and anomalies. (Starting in sprint 2)
+					ProblemList pl = parser.findProblems();
+					
+					if ( pl.size() == 0 ) {
+						System.out.println("File parsed! No Errors or Anomalies Found.");
+					}
+					else{
+						System.out.println( pl.buildOutputString() );
+					}
 				}
 			}			
 		}
