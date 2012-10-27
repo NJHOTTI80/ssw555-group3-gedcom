@@ -111,6 +111,7 @@ public class GedcomTest {
 	
 	@Test
 	public void testAnomalyWhenIndMarriedToMoreThanOnePerson() {
+		ProblemFinder pf = new ProblemFinder();
 		Individual i1 = new Individual("1");
 		Individual i2 = new Individual("2");
 		Individual i3 = new Individual("3");
@@ -119,12 +120,13 @@ public class GedcomTest {
 		
 		i1.setSpouse(i3, new GregorianCalendar(2012, 4, 3));
 		
-		assertTrue( i1.isMarriedToMoreThanOnePerson() );
-		assertTrue( !i3.isMarriedToMoreThanOnePerson() );
+		assertTrue( pf.isMarriedToMoreThanOnePerson(i1) );
+		assertTrue( !pf.isMarriedToMoreThanOnePerson(i3) );
 	}
 	
 	@Test
 	public void testWhenBirthdateLaterThanDeathDate() {
+		ProblemFinder pf = new ProblemFinder();
 		Individual i1 = new Individual("1");
 		Individual i2 = new Individual("2");
 		
@@ -134,8 +136,53 @@ public class GedcomTest {
 		i1.addDeathDate(new GregorianCalendar(1920, 10, 31));
 		i2.addDeathDate(new GregorianCalendar(1990, 10, 31));
 		
-		assertTrue( i1.isBirthDateAfterDeathDate() );
-		assertTrue( !i2.isBirthDateAfterDeathDate() );
+		assertTrue( pf.isBirthDateAfterDeathDate(i2) );
+		assertTrue( !pf.isBirthDateAfterDeathDate(i2) );
 	}
 
+	@Test
+	public void testMultiDeath(){
+		ProblemFinder pf = new ProblemFinder();
+		Individual test1 = new Individual("3");
+		Individual test2 = new Individual("42");
+		
+		test1.addDeathDate(new GregorianCalendar(1937, 6, 12));
+		test1.addDeathDate(new GregorianCalendar(1937, 12, 6));
+		test2.addDeathDate(new GregorianCalendar(1918, 6, 6));
+		
+		assertTrue(pf.multiDeathCheck(test1));
+		assertTrue(!pf.multiDeathCheck(test2));
+	}
+	
+	@Test
+	public void testMarriageToParent(){
+		ProblemFinder pf = new ProblemFinder();
+		Individual test1 = new Individual("5");
+		Individual test2 = new Individual("6");
+		Individual test3 = new Individual("7");
+		Individual test4 = new Individual("8");
+		Individual test5 = new Individual("9");
+		Family testf1 = new Family("1");
+		Family testf2 = new Family("2");
+		Family testf3 = new Family("3");
+		
+		test1.addFamS("1");
+		test1.addFamS("2");
+		test2.addFamS("1");
+		test3.addFamC("1");
+		test3.addFamS("1");
+		test4.addFamS("3");
+		test5.addFamS("3");
+		
+		testf1.setHusb("5");
+		testf1.setWife("6");
+		testf2.setHusb("5");
+		testf2.setWife("7");
+		testf3.setHusb("8");
+		testf3.setWife("9");
+		
+		assertTrue(pf.parentMarriage(testf2, test1, test3));
+		assertTrue(!pf.parentMarriage(testf3, test4, test5));
+		assertTrue(!pf.parentMarriage(testf1, test1, test2));
+	}
 }

@@ -1,0 +1,323 @@
+0 NOT There is an error on Line 1 (Invalid Tag)
+
+0 @I1@ INDI
+1 NAME Remilia /Scarlet/
+2 GIVN Remilia
+2 SURN Scarlet
+2 _MARNM Scarlet
+1 SEX F
+1 BIRT
+2 DATE 3 MAY 1612
+1 DEAT Y
+2 DATE 15 JUN 1678
+1 FAMS @F1@
+1 FAMC @F2@
+0 @I2@ INDI
+1 NAME Kaito /Scarlet/
+2 GIVN Kaito
+2 SURN Scarlet
+2 _MARNM Scarlet
+1 SEX M
+1 BIRT
+2 DATE 13 SEP 1590
+1 DEAT Y
+2 DATE 31 DEC 1620
+1 FAMS @F2@
+0 @I3@ INDI
+1 NAME Reimu /Scarlet/
+2 GIVN Reimu
+2 SURN Scarlet
+2 _MARNM Scarlet
+1 SEX F
+1 BIRT
+2 DATE 9 DEC 1584
+1 DEAT Y
+2 DATE 31 AUG 1630
+1 FAMS @F2@
+0 NOTE Flandre was born after the death of her parents.
+0 @I4@ INDI
+1 NAME Flandre /Scarlet/
+2 GIVN Flandre
+2 SURN Scarlet
+2 _MARNM Scarlet
+1 SEX F
+1 BIRT
+2 DATE 12 AUG 1650
+1 DEAT Y
+2 DATE 18 MAY 1743
+1 FAMS @F3@
+1 FAMC @F2@
+0 NOTE Sakuya is a female husband
+0 @I5@ INDI
+1 NAME Sakuya /Izayoi/
+2 GIVN Sakuya
+2 SURN Izayoi
+2 _MARNM Izayoi
+1 SEX F
+1 BIRT
+2 DATE 26 SEP 1628
+1 DEAT Y
+2 DATE 14 JUL 1687
+1 FAMS @F1@
+0 @I6@ INDI
+1 NAME Hong /Scarlet/
+2 GIVN Hong
+2 SURN Scarlet
+2 _MARNM Meiling
+1 SEX F
+1 BIRT
+2 DATE 31 AUG 1671
+1 DEAT Y
+2 DATE 16 DEC 1735
+1 FAMS @F4@
+1 FAMC @F1@
+0 @I7@ INDI
+1 NAME Cheshire /Cat/
+2 GIVN Cheshire
+2 SURN Cat
+2 _MARNM Cat
+1 SEX M
+1 BIRT
+2 DATE 31 OCT 1665
+1 DEAT Y
+2 DATE 15 JUN 1865
+1 FAMS @F3@
+0 NOTE Yoko was married to two women at women at the same time.
+0 @I8@ INDI
+1 NAME Yoko /Scarlet/
+2 GIVN Yoko
+2 SURN Scarlet
+2 _MARNM Kurama
+1 SEX M
+1 BIRT
+2 DATE 31 DEC 1700
+1 DEAT Y
+2 DATE 19 MAR 1760
+1 FAMS @F5@
+1 FAMS @F6@
+1 FAMC @F3@
+0 @I9@ INDI
+1 NAME Cirno /Ice/
+2 GIVN Cirno
+2 SURN Ice
+2 _MARNM Kurama
+1 SEX F
+1 BIRT
+2 DATE 9 SEP 1709
+1 DEAT Y
+2 DATE 18 OCT 1790
+1 FAMS @F5@
+0 @I10@ INDI
+1 NAME Lyrica /Prismriver/
+2 GIVN Lyrica
+2 SURN Prismriver
+2 _MARNM Prismriver
+1 SEX F
+1 BIRT
+2 DATE 6 DEC 1690
+1 DEAT Y
+2 DATE 17 MAY 1760
+1 FAMS @F6@
+0 NOTE Ran married a woman who was already dead
+0 @I11@ INDI
+1 NAME Ran /Yakumo/
+2 GIVN Ran
+2 SURN Yakumo
+2 _MARNM Yakumo
+1 SEX M
+1 BIRT
+2 DATE 8 JUN 1690
+1 DEAT Y
+2 DATE 18 JUL 1760
+1 FAMS @F4@
+0 NOTE Mystia married her brother in F8
+0 @I12@ INDI
+1 NAME Mystia Kurama /Prismriver/
+2 GIVN Mystia Kurama
+2 SURN Prismriver
+2 _MARNM Prismriver
+1 SEX F
+1 BIRT
+2 DATE 13 AUG 1745
+1 DEAT Y
+2 DATE 18 AUG 1813
+1 FAMS @F8@
+1 FAMC @F6@
+0 NOTE Hei married his sister in F8
+0 @I13@ INDI
+1 NAME Hei Kurama /Prismriver/
+2 GIVN Hei Kurama
+2 SURN Prismriver
+2 _MARNM Prismriver
+1 SEX M
+1 BIRT
+2 DATE 10 APR 1746
+1 DEAT Y
+2 DATE 15 MAY 1812
+1 FAMS @F8@
+1 FAMC @F6@
+0 NOTE Yuno was born after her death.
+0 @I14@ INDI
+1 NAME Yuno /Kurama/
+2 GIVN Yuno
+2 SURN Kurama
+2 _MARNM Kurama
+1 SEX F
+1 BIRT
+2 DATE 3 MAY 1749
+1 DEAT Y
+2 DATE 1 MAY 1749
+1 FAMC @F5@
+0 NOTE Patchouli is a female husband in F7
+0 @I15@ INDI
+1 NAME Patchouli /Izayoi/
+2 GIVN Patchouli
+2 SURN Izayoi
+2 _MARNM Izayoi
+1 SEX F
+1 BIRT
+2 DATE 6 APR 1670
+1 DEAT Y
+2 DATE 16 AUG 1750
+1 FAMS @F7@
+1 FAMC @F1@
+0 NOTE Makino is a male wife in F7
+0 @I16@ INDI
+1 NAME Makino /Izayoi/
+2 GIVN Makino
+2 SURN Izayoi
+2 _MARNM Izayoi
+1 SEX M
+1 BIRT
+2 DATE 9 MAY 1676
+1 DEAT Y
+2 DATE 17 SEP 1752
+1 FAMS @F7@
+0 NOTE Mikuru was born before her parents were.
+0 NOTE Mikuru has two death dates.
+0 @I17@ INDI
+1 NAME Mikuru /Izayoi/
+2 GIVN Mikuru
+2 SURN Izayoi
+2 _MARNM Izayoi
+1 SEX F
+1 BIRT
+2 DATE 8 NOV 1650
+1 DEAT Y
+2 DATE 18 APR 1780
+1 DEAT Y
+2 DATE 20 APR 1780
+1 FAMC @F7@
+0 NOTE Lily was born in the future (compared to current day), after her parent's death
+0 @I18@ INDI
+1 NAME Lily /Meiling/
+2 GIVN Lily
+2 SURN Meiling
+2 _MARNM White
+1 SEX F
+1 BIRT
+2 DATE 25 DEC 2013
+1 DEAT Y
+2 DATE 25 DEC 2014
+1 FAMC @F4@
+0 @F1@ FAM
+1 HUSB @I5@
+1 WIFE @I1@
+1 CHIL @I6@
+1 CHIL @I15@
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 CHIL @I4@
+1 MARR
+2 DATE 6 JUL 1605
+1 _CURRENT Y
+0 @F3@ FAM
+1 HUSB @I7@
+1 WIFE @I4@
+1 CHIL @I8@
+1 MARR
+2 DATE 11 APR 1700
+1 _CURRENT Y
+0 @F4@ FAM
+1 HUSB @I11@
+1 WIFE @I6@
+1 CHIL @I18@
+1 MARR
+2 DATE 5 APR 1745
+1 _CURRENT Y
+0 @F5@ FAM
+1 HUSB @I8@
+1 WIFE @I9@
+1 CHIL @I14@
+1 MARR
+2 DATE 8 SEP 1749
+1 _CURRENT Y
+0 @F6@ FAM
+1 HUSB @I8@
+1 WIFE @I10@
+1 CHIL @I12@
+1 CHIL @I13@
+1 MARR
+2 DATE 11 JUN 1740
+1 DIV
+2 DATE 6 JUL 1750
+1 _CURRENT N
+0 @F7@ FAM
+1 HUSB @I15@
+1 WIFE @I16@
+1 CHIL @I17@
+1 MARR
+2 DATE 15 APR 1700
+1 _CURRENT Y
+0 @F8@ FAM
+1 HUSB @I13@
+1 WIFE @I12@
+1 MARR
+2 DATE 22 JUN 1760
+
+
+0 NOTE there is an example for M classified as wife or F classified as husband but with wrong tags so idk how it will work
+0 @I100@ INDI
+1 NAME Alice /Carter/
+1 SEX F
+1 BIRT
+2 DATE 7 APR 1949
+1 FAMS @F100@
+0 @I101@ INDI
+1 NAME Bob /Carter/
+1 SEX M
+1 BIRT
+2 DATE 27 APR 1949
+1 FAMS @F100@
+0 @F100@ FAM
+1 HUSB @I100@
+1 WIFE @I101@
+1 CHIL @I102@
+1 CHIL @I103@
+1 MARR
+2 DATE 8 SEP 1969
+
+0 NOTE this is an example of a marriage to a sibiling
+0 @I102@ INDI
+1 NAME Jane /Carter/
+1 SEX F
+1 BIRT
+2 DATE 7 MAR 1963
+1 FAMS @F101@
+1 FAMC @F100@
+0 @I103@ INDI
+1 NAME John /Carter/
+1 SEX M
+1 BIRT
+2 DATE 27 DEC 1965
+1 FAMS @F101@
+1 FAMC @F100@
+0 @F101@ FAM
+1 HUSB @I103@
+1 WIFE @I102@
+1 MARR
+2 DATE 8 SEP 1988
+0 TRLR
