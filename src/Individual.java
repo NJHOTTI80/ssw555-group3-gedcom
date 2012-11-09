@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
 
 
 public class Individual 
@@ -101,6 +103,22 @@ public class Individual
 	
 	public void setLineNumber(int lineNum) {
 		this.lineNumber = lineNum;
+	}
+	
+	public ArrayList<String> getAllSpousesIDs(Hashtable<String, Family> family)
+	{
+		ArrayList<String> spouses = new ArrayList<String>();
+		
+		Iterator<String> i = getFamS().iterator();
+		while(i.hasNext())
+		{
+			if(sex.equals("F"))
+				spouses.add(family.get(i.next()).getHusb());
+			else if(sex.equals("M"))
+				spouses.add(family.get(i.next()).getWife());
+		}
+		
+		return spouses;
 	}
 	
 	

@@ -3,6 +3,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Vector;
 
 public class GedcomTest {
@@ -116,9 +118,9 @@ public class GedcomTest {
 		Individual i2 = new Individual("2");
 		Individual i3 = new Individual("3");
 		
-		i1.setSpouse(i2, new GregorianCalendar(2012, 6, 5));
+		//i1.setSpouse(i2, new GregorianCalendar(2012, 6, 5));
 		
-		i1.setSpouse(i3, new GregorianCalendar(2012, 4, 3));
+		//i1.setSpouse(i3, new GregorianCalendar(2012, 4, 3));
 		
 		assertTrue( pf.isMarriedToMoreThanOnePerson(i1) );
 		assertTrue( !pf.isMarriedToMoreThanOnePerson(i3) );
@@ -183,5 +185,37 @@ public class GedcomTest {
 		assertTrue(pf.parentMarriage(testf2, test1, test3));
 		assertTrue(!pf.parentMarriage(testf3, test4, test5));
 		assertTrue(!pf.parentMarriage(testf1, test1, test2));
+	}
+	
+	@Test
+	public void testMarriageToSibling()
+	{
+		Family fam1 = new Family("1");
+		Family fam2 = new Family("2");
+		
+		Individual ind1 = new Individual("1");
+		Individual ind2 = new Individual("2");
+		
+		ind1.setSex("M");
+		
+		ind1.addFamC("2");
+		ind2.addFamC("2");
+		
+		fam1.setHusb(ind1.getId());
+		fam1.setWife(ind2.getId());
+		
+		fam2.addChild(ind1.getId());
+		fam2.addChild(ind2.getId());
+		
+		Hashtable<String, Individual> indTable = new Hashtable<String, Individual>();
+		indTable.put(ind1.getId(), ind1);
+		indTable.put(ind2.getId(), ind2);
+		
+		Hashtable<String, Family> famTable = new Hashtable<String, Family>();
+		famTable.put(fam1.getID(), fam1);
+		famTable.put(fam2.getID(), fam2);
+		
+		assertTrue(ProblemFinder.isMarriedToSibling(famTable, indTable, ind1));
+	
 	}
 }

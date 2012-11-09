@@ -100,10 +100,15 @@ public class GedReader {
 			if ( ProblemFinder.isMarriedToMoreThanOnePerson( personIndex.get(s) )) {
 				pl.add( new Error( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to more than 1 indivudal at a time."));
 			}
-		}
+			
+			if(ProblemFinder.isMarriedToSibling(familyIndex, personIndex, personIndex.get(s)))
+			{
+				pl.add(new Anomaly(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to a sibling."));
+			}
+			
+		}		
 		
-		
-		//loop through each family and check for each problem that can occur in a family
+		//loop through each family and check for each problem that can occur in a family (Katelyn: I don't think we should loop through the families if we look back at the data structure file I came up with we don't have to)
 		
 		
 		
