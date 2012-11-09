@@ -89,23 +89,31 @@ public class GedReader {
 	
 	public ProblemList findProblems() {
 		ProblemList pl = new ProblemList();
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
 		
 		// loop through each person and check for each kind of problem that can occur
 		// in an individual
 		for ( String s : personIndex.keySet() ) {
-			if ( ProblemFinder.isBirthDateAfterDeathDate( personIndex.get(s) )) {
+			if ( pf.isBirthDateAfterDeathDate( personIndex.get(s) )) {
 				pl.add( new Error( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " has a birthdate that occurs later than their death date."));
 			}
 			
-			if ( ProblemFinder.isMarriedToMoreThanOnePerson( familyIndex, personIndex, personIndex.get(s) )) {
+			if ( pf.isMarriedToMoreThanOnePerson( familyIndex, personIndex, personIndex.get(s) )) {
 				pl.add( new Anomaly( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to more than 1 indivudal at a time."));
 			}
 			
-			if(ProblemFinder.isMarriedToSibling(familyIndex, personIndex, personIndex.get(s)))
+			if(pf.isMarriedToSibling(familyIndex, personIndex, personIndex.get(s)))
 			{
 				pl.add(new Anomaly(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to a sibling."));
 			}
-			
+			if(pf.parentMarriage(personIndex.get(s)))
+			{
+				pl.add(new Anomaly(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " married one of their children."));
+			}
+			if(pf.multiDeathCheck(personIndex.get(s)))
+			{
+				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " has more than one death date listed"));
+			}
 		}		
 		
 		//loop through each family and check for each problem that can occur in a family (Katelyn: I don't think we should loop through the families if we look back at the data structure file I came up with we don't have to)

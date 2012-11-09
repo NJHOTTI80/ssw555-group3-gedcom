@@ -67,36 +67,25 @@ public class ProblemFinder {
 		return false;
 	}
 	
-	public boolean parentMarriage(Family f, Individual i1, Individual i2)
+	public boolean parentMarriage(Individual i)
 	{
+		HashSet<String> marrFams = i.getFamS();
+		ArrayList<String> spouses = i.getAllSpousesIDs(familyIndex);
+		ArrayList<String> allchildren = new ArrayList<String>();
+		Iterator<String> f = marrFams.iterator();
+		//Gather all children of an individual
+		while(f.hasNext())
+		{
+			allchildren.addAll(familyIndex.get(f.next()).getChildren());	
+		}
+		//For each spouse of the individual
+		for(String spouseID: spouses)
+		{
+			//If the spouse is the child of an individual, return true.
+			if(allchildren.contains(spouseID))
+				return true;
+		}
+		
 		return false;
-	}
-	
-	//This function checks all families,  individuals for the errors and anomalies our program supports.
-	//Any boolean function above that returns true will add an entry to the problem list in this function.
-	//At the end of all error checking, this function will also print the output.
-	public void checkAllErrors()
-	{
-		String output;
-		Family f;
-		Individual i;
-		int k;
-		//Check each individual in the file for individual-level errors
-		for(k = 0; k < listOfPeople.size(); k++)
-		{
-			i = personIndex.get(listOfPeople.elementAt(k));
-			//Do all error checks on i
-			
-		}
-		
-		//Check each family in the file for family-level errors
-		for(k = 0; k < listOfFams.size(); k++)
-		{
-			f = familyIndex.get(listOfFams.elementAt(k));
-			//Do all error checks on f
-			
-		}
-		
-		output = pl.buildOutputString();
 	}
 }

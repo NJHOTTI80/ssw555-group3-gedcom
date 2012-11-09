@@ -176,7 +176,11 @@ public class GedcomTest {
 	
 	@Test
 	public void testMarriageToParent(){
-		ProblemFinder pf = new ProblemFinder();
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>(50);
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
 		Individual test1 = new Individual("5");
 		Individual test2 = new Individual("6");
 		Individual test3 = new Individual("7");
@@ -193,17 +197,42 @@ public class GedcomTest {
 		test3.addFamS("1");
 		test4.addFamS("3");
 		test5.addFamS("3");
-		
+		test1.setSex("M");
+		test2.setSex("F");
+		test3.setSex("F");
+		test4.setSex("M");
+		test5.setSex("F");
 		testf1.setHusb("5");
 		testf1.setWife("6");
 		testf2.setHusb("5");
 		testf2.setWife("7");
 		testf3.setHusb("8");
 		testf3.setWife("9");
+		testf1.addChild(test3.getId());
 		
-		assertTrue(pf.parentMarriage(testf2, test1, test3));
-		assertTrue(!pf.parentMarriage(testf3, test4, test5));
-		assertTrue(!pf.parentMarriage(testf1, test1, test2));
+		personIndex.put(test1.getId(), test1);
+		personIndex.put(test2.getId(), test2);
+		personIndex.put(test3.getId(), test3);
+		personIndex.put(test4.getId(), test4);
+		personIndex.put(test5.getId(), test5);
+		familyIndex.put(testf1.getID(), testf1);
+		familyIndex.put(testf2.getID(), testf2);
+		familyIndex.put(testf3.getID(), testf3);
+		listOfPeople.add(test1.getId());
+		listOfPeople.add(test2.getId());
+		listOfPeople.add(test3.getId());
+		listOfPeople.add(test4.getId());
+		listOfPeople.add(test5.getId());
+		listOfFams.add(testf1.getID());
+		listOfFams.add(testf2.getID());
+		listOfFams.add(testf3.getID());
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue(!pf.parentMarriage(test3)); //Daughter married to father.  Should not be true because the function checks if the parent was married to their child, not the other way around.
+		assertTrue(pf.parentMarriage(test1)); //Father married to daughter.
+		assertTrue(!pf.parentMarriage(test4)); //Normal
+		assertTrue(!pf.parentMarriage(test2)); //Spouse of someone who married daughter in another marriage.
 	}
 	
 	@Test
