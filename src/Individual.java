@@ -113,9 +113,22 @@ public class Individual
 		while(i.hasNext())
 		{
 			if(sex.equals("F"))
-				spouses.add(family.get(i.next()).getHusb());
+			{
+				String s = i.next();
+				if ( family.containsKey(s) )
+				{
+					spouses.add(family.get(s).getHusb());
+				}
+			}
+				
 			else if(sex.equals("M"))
-				spouses.add(family.get(i.next()).getWife());
+			{
+				String s = i.next();
+				if ( family.containsKey(s) )
+				{
+					spouses.add(family.get(s).getWife());
+				}
+			}
 		}
 		
 		return spouses;

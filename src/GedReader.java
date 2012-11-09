@@ -97,8 +97,8 @@ public class GedReader {
 				pl.add( new Error( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " has a birthdate that occurs later than their death date."));
 			}
 			
-			if ( ProblemFinder.isMarriedToMoreThanOnePerson( personIndex.get(s) )) {
-				pl.add( new Error( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to more than 1 indivudal at a time."));
+			if ( ProblemFinder.isMarriedToMoreThanOnePerson( familyIndex, personIndex, personIndex.get(s) )) {
+				pl.add( new Anomaly( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to more than 1 indivudal at a time."));
 			}
 			
 			if(ProblemFinder.isMarriedToSibling(familyIndex, personIndex, personIndex.get(s)))

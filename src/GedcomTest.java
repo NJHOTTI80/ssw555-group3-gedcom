@@ -113,17 +113,36 @@ public class GedcomTest {
 	
 	@Test
 	public void testAnomalyWhenIndMarriedToMoreThanOnePerson() {
-		ProblemFinder pf = new ProblemFinder();
 		Individual i1 = new Individual("1");
 		Individual i2 = new Individual("2");
 		Individual i3 = new Individual("3");
+		Family f1 = new Family("1");
+		Family f2 = new Family("2");
 		
-		//i1.setSpouse(i2, new GregorianCalendar(2012, 6, 5));
 		
-		//i1.setSpouse(i3, new GregorianCalendar(2012, 4, 3));
+		Hashtable<String, Individual> indTable = new Hashtable<String, Individual>();
+		indTable.put(i1.getId(), i1);
+		indTable.put(i2.getId(), i2);
+		indTable.put(i3.getId(), i3);
 		
-		assertTrue( pf.isMarriedToMoreThanOnePerson(i1) );
-		assertTrue( !pf.isMarriedToMoreThanOnePerson(i3) );
+		f1.setHusb("1");
+		f1.setWife("2");
+		i1.addFamS(f1.getID());
+		i2.addFamS(f1.getID());
+		f1.setMarriage(new GregorianCalendar(2002, 6, 5));
+		
+		f2.setHusb("1");
+		f2.setWife("3");
+		i1.addFamS(f2.getID());
+		i3.addFamS(f2.getID());
+		f2.setMarriage(new GregorianCalendar(2012, 6, 5));
+		
+		Hashtable<String, Family> famTable = new Hashtable<String, Family>();
+		famTable.put(f1.getID(), f1);
+		famTable.put(f2.getID(), f2);
+		
+		assertTrue( ProblemFinder.isMarriedToMoreThanOnePerson(famTable, indTable, i1) );
+		//assertTrue( !ProblemFinder.isMarriedToMoreThanOnePerson(i3) );
 	}
 	
 	@Test

@@ -44,8 +44,10 @@ public class ProblemFinder {
 		return false;
 	}
 	
-	public static boolean isMarriedToMoreThanOnePerson(Individual i){
-		return false;
+	public static boolean isMarriedToMoreThanOnePerson(Hashtable<String, Family> familyIndex, 
+			Hashtable<String, Individual> indIndex, Individual i) {
+		if ( i.getFamS().size() <= 1 ) return false;
+		else return true;
 	}
 
 	public static boolean isMarriedToSibling(Hashtable<String, Family> familyIndex, Hashtable<String, Individual> indIndex, Individual ind)
