@@ -263,7 +263,37 @@ public class GedcomTest {
 		famTable.put(fam1.getID(), fam1);
 		famTable.put(fam2.getID(), fam2);
 		
-		assertTrue(ProblemFinder.isMarriedToSibling(famTable, indTable, ind1));
+		assertTrue(ProblemFinder.isMarriedToSibling(famTable, indTable, ind1));	
+	}
 	
+	@Test
+	public void testWrongSpouseClassification()
+	{
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
+		Family fam = new Family("F1");
+		
+		Individual ind1 = new Individual("1");
+		Individual ind2 = new Individual("2"); 
+		
+		ind1.setSex("M");
+		ind2.setSex("F");
+		
+		ind1.addFamS(fam.getID());
+		ind2.addFamS(fam.getID());
+		
+		fam.setWife(ind1.getId());
+		fam.setHusb(ind2.getId());
+		
+		familyIndex.put(fam.getID(), fam);
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue(pf.wrongSpouseClassification(ind1));
+		assertTrue(pf.wrongSpouseClassification(ind2));
+		
 	}
 }

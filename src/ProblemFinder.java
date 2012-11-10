@@ -88,4 +88,27 @@ public class ProblemFinder {
 		
 		return false;
 	}
+	
+	public boolean wrongSpouseClassification(Individual i)
+	{		
+		String sex = i.getSex();
+		HashSet<String> famS = i.getFamS();
+		Iterator<String> famIDs = famS.iterator();
+		while(famIDs.hasNext())
+		{
+			Family fam = familyIndex.get(famIDs.next());
+			if(sex.equals("M"))
+			{
+				if(fam.getWife().equals(i.getId()))
+					return true;
+			}
+			else if(sex.equals("F"))
+			{
+				if(fam.getHusb().equals(i.getId()))
+					return true;
+			}
+		}
+		return false;
+		
+	}
 }

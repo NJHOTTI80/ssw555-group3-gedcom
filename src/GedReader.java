@@ -114,6 +114,11 @@ public class GedReader {
 			{
 				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " has more than one death date listed"));
 			}
+			if(pf.wrongSpouseClassification(personIndex.get(s)))
+			{
+				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is classified as the wrong spouse sex"));
+			}
+			
 		}		
 		
 		//loop through each family and check for each problem that can occur in a family (Katelyn: I don't think we should loop through the families if we look back at the data structure file I came up with we don't have to)
