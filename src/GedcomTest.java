@@ -296,4 +296,36 @@ public class GedcomTest {
 		assertTrue(pf.wrongSpouseClassification(ind2));
 		
 	}
+	
+	@Test
+	public void testNoDivorceRecordForDeadSpouse() {
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
+		Individual person = new Individual("1");
+		Individual wife = new Individual("2");
+		
+		Family fam = new Family("F1");
+		
+		person.setSex("M");
+		wife.setSex("F");
+		wife.addDeathDate(new GregorianCalendar(10, 10, 2011));
+		
+		person.addFamS(fam.getID());
+		wife.addFamS(fam.getID());
+		
+		fam.setWife(person.getId());
+		fam.setHusb(wife.getId());
+		fam.setMarriage(new GregorianCalendar(10, 12, 1990));
+		
+		familyIndex.put(fam.getID(), fam);
+		
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue( pf.isThereNoDivorceRecordForDeadSpuse(person) );
+		
+	}
 }
