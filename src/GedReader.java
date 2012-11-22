@@ -48,7 +48,7 @@ public class GedReader {
 					if(line.length() > 0){
 						if(line.charAt(0) == '0')
 						{
-							if(line.indexOf("FAM") != -1 || line.indexOf("INDI") != -1){
+							if(line.indexOf("FAM") != -1 || line.indexOf("INDI") != -1 || line.indexOf("TRLR") != -1){
 								if(parseInd == true){
 									personIndex.put(curI.getId(), curI);
 									parseInd = false;
