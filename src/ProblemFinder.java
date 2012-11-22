@@ -89,6 +89,11 @@ public class ProblemFinder {
 		return false;
 	}
 	
+	public boolean bornBeforeParents(Individual i)
+	{
+		return false;
+	}
+	
 	public boolean wrongSpouseClassification(Individual i)
 	{		
 		String sex = i.getSex();
@@ -111,4 +116,5 @@ public class ProblemFinder {
 		return false;
 		
 	}
+	
 }

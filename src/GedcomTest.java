@@ -298,6 +298,75 @@ public class GedcomTest {
 	}
 	
 	@Test
+	public void testChildBornBeforeParent()
+	{
+		
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>(50);
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
+		Individual test1 = new Individual("1");
+		Individual test2 = new Individual("2");
+		Individual test3 = new Individual("3");
+		Individual test4 = new Individual("4");
+		Individual test5 = new Individual("5");
+		Individual test6 = new Individual("6");
+		Family testf1 = new Family("1");
+		Family testf2 = new Family("2");
+		GregorianCalendar older = new GregorianCalendar(10, 10, 1970);
+		GregorianCalendar mid = new GregorianCalendar(10, 10, 1980);
+		GregorianCalendar young = new GregorianCalendar(10, 10, 1997);
+				
+		test1.addFamS("1");
+		test1.setBirthDate(older);
+		test2.addFamS("1");
+		test2.setBirthDate(mid);
+		test3.addFamC("1");
+		test3.setBirthDate(young);
+		test4.addFamS("2");
+		test4.setBirthDate(mid);
+		test5.addFamS("2");
+		test5.setBirthDate(young);
+		test6.addFamC("2");
+		test6.setBirthDate(mid);
+		test1.setSex("M");
+		test2.setSex("F");
+		test3.setSex("F");
+		test4.setSex("M");
+		test5.setSex("F");
+		test6.setSex("F");
+		testf1.setHusb("1");
+		testf1.setWife("2");
+		testf2.setHusb("4");
+		testf2.setWife("5");
+		testf1.addChild(test3.getId());
+		testf2.addChild(test6.getId());
+		
+		personIndex.put(test1.getId(), test1);
+		personIndex.put(test2.getId(), test2);
+		personIndex.put(test3.getId(), test3);
+		personIndex.put(test4.getId(), test4);
+		personIndex.put(test5.getId(), test5);
+		personIndex.put(test6.getId(), test6);
+		familyIndex.put(testf1.getID(), testf1);
+		familyIndex.put(testf2.getID(), testf2);
+		listOfPeople.add(test1.getId());
+		listOfPeople.add(test2.getId());
+		listOfPeople.add(test3.getId());
+		listOfPeople.add(test4.getId());
+		listOfPeople.add(test5.getId());
+		listOfPeople.add(test6.getId());
+		listOfFams.add(testf1.getID());
+		listOfFams.add(testf2.getID());
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue(pf.bornBeforeParents(test6));
+		assertTrue(!pf.bornBeforeParents(test3));
+	}
+	
+	@Test
 	public void testNoDivorceRecordForDeadSpouse() {
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
