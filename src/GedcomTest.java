@@ -245,6 +245,10 @@ public class GedcomTest {
 		Individual ind2 = new Individual("2");
 		
 		ind1.setSex("M");
+		ind2.setSex("F");
+		
+		ind1.addFamS("1");
+		ind2.addFamS("1");
 		
 		ind1.addFamC("2");
 		ind2.addFamC("2");
@@ -396,5 +400,119 @@ public class GedcomTest {
 		
 		assertTrue( pf.isThereNoDivorceRecordForDeadSpuse(person) );
 		
+	}
+	
+	@Test
+	public void testFutureDateInd()
+	{
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
+		Individual i1 = new Individual("1");		
+		i1.setBirthDate(new GregorianCalendar(2015, 12, 31));
+		i1.addDeathDate(new GregorianCalendar(2011, 10, 15));
+		
+		Individual i2 = new Individual("2");
+		i2.setBirthDate(new GregorianCalendar(1980, 1, 20));
+		i2.addDeathDate(new GregorianCalendar(2015, 7, 31));
+		
+		Individual i3 = new Individual("3");
+		i3.setBirthDate(new GregorianCalendar(1934, 3, 23));
+		
+		personIndex.put(i1.getId(), i1);
+		personIndex.put(i2.getId(), i2);
+		personIndex.put(i3.getId(), i3);
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue(pf.futureDateInd(i1));
+		assertTrue(pf.futureDateInd(i2));
+		assertTrue(!pf.futureDateInd(i3));
+	}
+	
+	@Test
+	public void testFutureDateFam()
+	{
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
+		Family f1 = new Family("1");
+		f1.setMarriage(new GregorianCalendar(2015, 4, 15));
+		
+		Family f2 = new Family("2");
+		f2.setMarriage(new GregorianCalendar(2011, 6, 21));
+		f2.setDivorce(new GregorianCalendar(2015, 12, 31));
+		
+		Family f3 = new Family("3");
+		f3.setMarriage(new GregorianCalendar(2015, 8, 5));
+		f3.setDivorce(new GregorianCalendar(2016, 8, 10));
+		
+		Family f4 = new Family("4");
+		f4.setMarriage(new GregorianCalendar(1994, 6, 4));
+		
+		familyIndex.put(f1.getID(), f1);
+		familyIndex.put(f2.getID(), f2);
+		familyIndex.put(f3.getID(), f3);
+		familyIndex.put(f4.getID(), f4);
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue(pf.futureDateFam(f1));
+		assertTrue(pf.futureDateFam(f2));
+		assertTrue(pf.futureDateFam(f3));
+		assertTrue(!pf.futureDateFam(f4));
+	}
+	
+	public void testMarriageToDeadPerson()
+	{
+		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
+		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
+		Vector<String> listOfPeople = new Vector<String>(200);
+		Vector<String> listOfFams = new Vector<String>(50);
+		
+		Individual i1 = new Individual("1");
+		i1.setSex("M");
+		i1.setBirthDate(new GregorianCalendar(1980, 2, 14));
+		i1.addDeathDate(new GregorianCalendar(2010, 6, 30));
+		i1.addFamS("fam1");
+		i1.addFamS("fam2");
+		
+		Individual i2 = new Individual("2");
+		i2.setSex("F");
+		i2.setBirthDate(new GregorianCalendar(1982, 8, 14));
+		i2.addFamS("fam1");
+		
+		Individual i3 = new Individual("2");
+		i2.setSex("F");
+		i2.setBirthDate(new GregorianCalendar(1979, 4, 1));
+		i2.addFamS("fam2");
+		
+		Family f1 = new Family("fam1");
+		f1.setHusb("1");
+		f1.setWife("2");
+		f1.setMarriage(new GregorianCalendar(2011, 7, 17));
+		
+		Family f2 = new Family("fam2");
+		f1.setHusb("1");
+		f1.setWife("3");
+		f1.setMarriage(new GregorianCalendar(2008, 8, 6));
+		f1.setDivorce(new GregorianCalendar(2010, 6, 30));
+		
+		familyIndex.put(f1.getID(), f1);
+		familyIndex.put(f2.getID(), f2);
+		
+		personIndex.put(i1.getId(), i1);
+		personIndex.put(i2.getId(), i2);
+		personIndex.put(i3.getId(), i3);
+		
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		
+		assertTrue(!pf.marriageToDeadPerson(i1));
+		assertTrue(pf.marriageToDeadPerson(i2));
+		assertTrue(!pf.marriageToDeadPerson(i3));
 	}
 }
