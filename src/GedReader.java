@@ -169,7 +169,7 @@ public class GedReader {
 		}else if(tag.equalsIgnoreCase("DATE")){
 			if(tokens.length > 3){
 				month = getMonth(tokens[3]);
-				GregorianCalendar m = new GregorianCalendar(Integer.parseInt(tokens[2]), month, Integer.parseInt(tokens[4]));
+				GregorianCalendar m = new GregorianCalendar(Integer.parseInt(tokens[4]), month, Integer.parseInt(tokens[2]));
 				if(birthD == true){
 					birthD = false;
 					cur.setBirthDate(m);
@@ -201,7 +201,7 @@ public class GedReader {
 		}else if(tag.equalsIgnoreCase("DATE")){
 			if(tokens.length > 3){
 				month = getMonth(tokens[3]);
-				GregorianCalendar m = new GregorianCalendar(Integer.parseInt(tokens[2]), month, Integer.parseInt(tokens[4]));
+				GregorianCalendar m = new GregorianCalendar(Integer.parseInt(tokens[4]), month, Integer.parseInt(tokens[2]));
 				if(marrD == true){
 					marrD = false;
 					cur.setMarriage(m);

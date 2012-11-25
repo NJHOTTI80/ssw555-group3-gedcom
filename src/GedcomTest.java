@@ -318,9 +318,9 @@ public class GedcomTest {
 		Individual test6 = new Individual("6");
 		Family testf1 = new Family("1");
 		Family testf2 = new Family("2");
-		GregorianCalendar older = new GregorianCalendar(10, 10, 1970);
-		GregorianCalendar mid = new GregorianCalendar(10, 10, 1980);
-		GregorianCalendar young = new GregorianCalendar(10, 10, 1997);
+		GregorianCalendar older = new GregorianCalendar(1970, 10, 10);
+		GregorianCalendar mid = new GregorianCalendar(1980, 10, 10);
+		GregorianCalendar young = new GregorianCalendar(1997, 10, 10);
 				
 		test1.addFamS("1");
 		test1.setBirthDate(older);
@@ -384,14 +384,14 @@ public class GedcomTest {
 		
 		person.setSex("M");
 		wife.setSex("F");
-		wife.addDeathDate(new GregorianCalendar(10, 10, 2011));
+		wife.addDeathDate(new GregorianCalendar(2011, 10, 10));
 		
 		person.addFamS(fam.getID());
 		wife.addFamS(fam.getID());
 		
 		fam.setWife(person.getId());
 		fam.setHusb(wife.getId());
-		fam.setMarriage(new GregorianCalendar(10, 12, 1990));
+		fam.setMarriage(new GregorianCalendar(1990, 12, 10));
 		
 		familyIndex.put(fam.getID(), fam);
 		
