@@ -116,5 +116,16 @@ public class ProblemFinder {
 		return false;
 		
 	}
+
+	public boolean isThereNoDivorceRecordForDeadSpuse(Individual person) {
+		if ( person.isDead() ) {
+			for ( String s : person.getFamS() ) {
+				if ( familyIndex.get(s).getDD() == null ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 }

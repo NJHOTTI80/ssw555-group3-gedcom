@@ -389,16 +389,18 @@ public class GedcomTest {
 		person.addFamS(fam.getID());
 		wife.addFamS(fam.getID());
 		
-		fam.setWife(person.getId());
-		fam.setHusb(wife.getId());
+		fam.setHusb(person.getId());
+		fam.setWife(wife.getId());
 		fam.setMarriage(new GregorianCalendar(1990, 12, 10));
 		
 		familyIndex.put(fam.getID(), fam);
 		
+		personIndex.put("1", person);
+		personIndex.put("2", wife);
 		
 		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
 		
-		assertTrue( pf.isThereNoDivorceRecordForDeadSpuse(person) );
+		assertTrue( pf.isThereNoDivorceRecordForDeadSpuse(wife) );
 		
 	}
 	
