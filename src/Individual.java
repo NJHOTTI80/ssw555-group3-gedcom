@@ -15,6 +15,7 @@ public class Individual
 	private HashSet<String> famS;
 	private HashSet<String> famC;
 	private int lineNumber;
+  private boolean isDead;
 	
 	public Individual(String id)
 	{
@@ -23,6 +24,7 @@ public class Individual
 		this.famS = new HashSet<String>();
 		this.famC = new HashSet<String>();
 		setLineNumber(0);
+    isDead = false;
 	}
 	
 	public Individual(String id, int lineNumber)
@@ -32,6 +34,7 @@ public class Individual
 		this.famS = new HashSet<String>();
 		this.famC = new HashSet<String>();
 		setLineNumber(lineNumber);
+    isDead = false;
 	}
 	
 	public String getId()
@@ -75,6 +78,7 @@ public class Individual
 	public void addDeathDate(GregorianCalendar deathDate)
 	{
 		this.deathDates.add(deathDate);
+    isDead = true;
 	}
 	
 	public HashSet<String> getFamS()
@@ -134,5 +138,6 @@ public class Individual
 		return spouses;
 	}
 	
+  public boolean isDead() { return isDead; }
 	
 }
