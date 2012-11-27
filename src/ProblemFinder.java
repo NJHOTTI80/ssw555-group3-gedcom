@@ -91,6 +91,24 @@ public class ProblemFinder {
 	
 	public boolean bornBeforeParents(Individual i)
 	{
+		String father;
+		String mother;
+		String fam;
+		//Get FamC of i
+		HashSet<String> famC = i.getFamC();
+		Iterator<String> famID = famC.iterator();
+		//Get IDs for father/mother
+		if(famID.hasNext())
+		{
+			fam = famID.next();
+			father = familyIndex.get(fam).getHusb();
+			mother = familyIndex.get(fam).getWife();
+			//Compare the birthdates
+			if(i.getBirthDate().before(personIndex.get(father).getBirthDate()) || i.getBirthDate().before(personIndex.get(mother).getBirthDate()))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 	
