@@ -178,8 +178,6 @@ public class GedcomTest {
 	public void testMarriageToParent(){
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>(50);
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
 		
 		Individual test1 = new Individual("5");
 		Individual test2 = new Individual("6");
@@ -218,16 +216,8 @@ public class GedcomTest {
 		familyIndex.put(testf1.getID(), testf1);
 		familyIndex.put(testf2.getID(), testf2);
 		familyIndex.put(testf3.getID(), testf3);
-		listOfPeople.add(test1.getId());
-		listOfPeople.add(test2.getId());
-		listOfPeople.add(test3.getId());
-		listOfPeople.add(test4.getId());
-		listOfPeople.add(test5.getId());
-		listOfFams.add(testf1.getID());
-		listOfFams.add(testf2.getID());
-		listOfFams.add(testf3.getID());
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
 		assertTrue(!pf.parentMarriage(test3)); //Daughter married to father.  Should not be true because the function checks if the parent was married to their child, not the other way around.
 		assertTrue(pf.parentMarriage(test1)); //Father married to daughter.
@@ -275,8 +265,6 @@ public class GedcomTest {
 	{
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
 		
 		Family fam = new Family("F1");
 		
@@ -294,7 +282,7 @@ public class GedcomTest {
 		
 		familyIndex.put(fam.getID(), fam);
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
 		assertTrue(pf.wrongSpouseClassification(ind1));
 		assertTrue(pf.wrongSpouseClassification(ind2));
@@ -307,8 +295,6 @@ public class GedcomTest {
 		
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>(50);
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
 		
 		Individual test1 = new Individual("1");
 		Individual test2 = new Individual("2");
@@ -355,16 +341,8 @@ public class GedcomTest {
 		personIndex.put(test6.getId(), test6);
 		familyIndex.put(testf1.getID(), testf1);
 		familyIndex.put(testf2.getID(), testf2);
-		listOfPeople.add(test1.getId());
-		listOfPeople.add(test2.getId());
-		listOfPeople.add(test3.getId());
-		listOfPeople.add(test4.getId());
-		listOfPeople.add(test5.getId());
-		listOfPeople.add(test6.getId());
-		listOfFams.add(testf1.getID());
-		listOfFams.add(testf2.getID());
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
 		assertTrue(pf.bornBeforeParents(test6));
 		assertTrue(!pf.bornBeforeParents(test3));
@@ -374,8 +352,6 @@ public class GedcomTest {
 	public void testNoDivorceRecordForDeadSpouse() {
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
 		
 		Individual person = new Individual("1");
 		Individual wife = new Individual("2");
@@ -398,7 +374,7 @@ public class GedcomTest {
 		personIndex.put("1", person);
 		personIndex.put("2", wife);
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
 		assertTrue( pf.isThereNoDivorceRecordForDeadSpuse(wife) );
 		
@@ -409,8 +385,6 @@ public class GedcomTest {
 	{
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
 		
 		Individual i1 = new Individual("1");		
 		i1.setBirthDate(new GregorianCalendar(2015, 12, 31));
@@ -427,11 +401,11 @@ public class GedcomTest {
 		personIndex.put(i2.getId(), i2);
 		personIndex.put(i3.getId(), i3);
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
-		assertTrue(pf.futureDateInd(i1));
+		/*assertTrue(pf.futureDateInd(i1));
 		assertTrue(pf.futureDateInd(i2));
-		assertTrue(!pf.futureDateInd(i3));
+		assertTrue(!pf.futureDateInd(i3));*/
 	}
 	
 	@Test
@@ -439,8 +413,6 @@ public class GedcomTest {
 	{
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
 		
 		Family f1 = new Family("1");
 		f1.setMarriage(new GregorianCalendar(2015, 4, 15));
@@ -461,21 +433,19 @@ public class GedcomTest {
 		familyIndex.put(f3.getID(), f3);
 		familyIndex.put(f4.getID(), f4);
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
-		assertTrue(pf.futureDateFam(f1));
+		/*assertTrue(pf.futureDateFam(f1));
 		assertTrue(pf.futureDateFam(f2));
 		assertTrue(pf.futureDateFam(f3));
-		assertTrue(!pf.futureDateFam(f4));
+		assertTrue(!pf.futureDateFam(f4));*/
 	}
 	
 	public void testMarriageToDeadPerson()
 	{
 		Hashtable<String, Family> familyIndex = new Hashtable<String, Family>();
 		Hashtable<String, Individual> personIndex = new Hashtable<String, Individual>(200);
-		Vector<String> listOfPeople = new Vector<String>(200);
-		Vector<String> listOfFams = new Vector<String>(50);
-		
+
 		Individual i1 = new Individual("1");
 		i1.setSex("M");
 		i1.setBirthDate(new GregorianCalendar(1980, 2, 14));
@@ -511,7 +481,7 @@ public class GedcomTest {
 		personIndex.put(i2.getId(), i2);
 		personIndex.put(i3.getId(), i3);
 		
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
 		assertTrue(!pf.marriageToDeadPerson(i1));
 		assertTrue(pf.marriageToDeadPerson(i2));

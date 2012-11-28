@@ -11,20 +11,16 @@ public class ProblemFinder {
 	private ProblemList pl;
 	private Hashtable<String, Family> familyIndex;
 	private Hashtable<String, Individual> personIndex;
-	private Vector<String> listOfPeople;
-	private Vector<String> listOfFams;
 	
 	public ProblemFinder(){
 		pl = new ProblemList();
 	}
 	
-	public ProblemFinder(Hashtable<String, Family> fam, Hashtable<String, Individual> ind, Vector<String> people, Vector<String> families)
+	public ProblemFinder(Hashtable<String, Family> fam, Hashtable<String, Individual> ind)
 	{
 		pl = new ProblemList();
 		familyIndex = fam;
 		personIndex = ind;
-		listOfPeople = people;
-		listOfFams = families;
 	}
 	
 	public static boolean isBirthDateAfterDeathDate(Individual i){
@@ -140,6 +136,31 @@ public class ProblemFinder {
 			for ( String s : person.getFamS() ) {
 				if ( familyIndex.get(s).getDD() == null ) {
 					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean marriageToDeadPerson(Individual person)
+	{
+		for(String s: person.getFamS())
+		{
+			Family fam = familyIndex.get(s);
+			if(person.getSex().equals("M"))
+			{
+				Individual wife = personIndex.get(fam.getWife());
+				if(wife.isDead())
+				{
+					return wife.getDeathDates().get(0).before(fam.getMD());
+				}
+			}
+			else
+			{
+				Individual husb = personIndex.get(fam.getHusb());
+				if(husb.isDead())
+				{
+					return husb.getDeathDates().get(0).before(fam.getMD());
 				}
 			}
 		}

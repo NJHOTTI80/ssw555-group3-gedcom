@@ -19,14 +19,10 @@ public class GedReader {
 	private boolean divD = false;
 	private Hashtable<String, Family> familyIndex;
 	private Hashtable<String, Individual> personIndex;
-	private Vector<String> listOfPeople;
-	private Vector<String> listOfFams;
 	
 	public GedReader(){
 		familyIndex = new Hashtable<String, Family>(50);
 		personIndex = new Hashtable<String, Individual>(200);
-		listOfPeople = new Vector<String>(200);
-		listOfFams = new Vector<String>(50);
 	}
 	
 	public void readGED(File input){
@@ -62,14 +58,12 @@ public class GedReader {
 									parseInd = false;
 									id = parseID(line);
 									curF = new Family(id, lineNumber);
-									listOfFams.add(id);
 								}
 								else if(line.indexOf("INDI") != -1){
 									parseInd = true;
 									parseFam = false;
 									id = parseID(line);
 									curI = new Individual(id, lineNumber);
-									listOfPeople.add(id);
 								}
 							}
 						}else{
@@ -89,7 +83,7 @@ public class GedReader {
 	
 	public ProblemList findProblems() {
 		ProblemList pl = new ProblemList();
-		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex, listOfPeople, listOfFams);
+		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
 		// loop through each person and check for each kind of problem that can occur
 		// in an individual
@@ -123,6 +117,17 @@ public class GedReader {
 			{
 				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " had no divroce record from their spouse even though they are dead"));
 			}
+			
+			if(pf.bornBeforeParents(personIndex.get(s)))
+			{
+				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " was born before parent was born"));
+			}
+			if(pf.marriageToDeadPerson(personIndex.get(s)))
+			{
+				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " was married to a person who was already dead"));
+			}
+					
+			
 			
 		}		
 		
