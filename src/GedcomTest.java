@@ -40,11 +40,11 @@ public class GedcomTest {
 		Individual i2 = new Individual("@I1@");
 		
 		GregorianCalendar birthDate1 = new GregorianCalendar();
-		GregorianCalendar birthDate2 = new GregorianCalendar();
+		GregorianCalendar birthDate2 = new GregorianCalendar(1960,5, 30);
 		GregorianCalendar deathDate1 = new GregorianCalendar();	
 		GregorianCalendar deathDate1a = new GregorianCalendar();	
 		birthDate1.set(1940, 10, 24);
-		birthDate2.set(1960, 5, 30);
+		//birthDate2.set(1960, 5, 30);
 		deathDate1.set(2004, 8, 12);
 		deathDate1a.set(2004, 8, 13);
 		
@@ -65,8 +65,8 @@ public class GedcomTest {
 		assertEquals(2, i1.getDeathDates().size());
 		assertEquals("John Smith", i2.getName());
 		assertEquals("F", i1.getSex());
-		GregorianCalendar test = new GregorianCalendar();
-		test.set(1960, 5, 30);
+		GregorianCalendar test = new GregorianCalendar(1960, 5, 30);
+		//test.set(1960, 5, 30);
 		assertEquals(test, i2.getBirthDate());
 		assertTrue(i1.getFamS().contains("@F0@"));
 		assertTrue(i2.getFamC().contains("@F0@"));
@@ -403,9 +403,9 @@ public class GedcomTest {
 		
 		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
-		/*assertTrue(pf.futureDateInd(i1));
+		assertTrue(pf.futureDateInd(i1));
 		assertTrue(pf.futureDateInd(i2));
-		assertTrue(!pf.futureDateInd(i3));*/
+		assertTrue(!pf.futureDateInd(i3));
 	}
 	
 	@Test
@@ -435,10 +435,10 @@ public class GedcomTest {
 		
 		ProblemFinder pf = new ProblemFinder(familyIndex, personIndex);
 		
-		/*assertTrue(pf.futureDateFam(f1));
+		assertTrue(pf.futureDateFam(f1));
 		assertTrue(pf.futureDateFam(f2));
 		assertTrue(pf.futureDateFam(f3));
-		assertTrue(!pf.futureDateFam(f4));*/
+		assertTrue(!pf.futureDateFam(f4));
 	}
 	
 	public void testMarriageToDeadPerson()

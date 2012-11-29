@@ -126,14 +126,23 @@ public class GedReader {
 			{
 				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " was married to a person who was already dead"));
 			}
-					
+			if(pf.futureDateInd(personIndex.get(s)))
+			{
+				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " has a date listed in the future associated with it."));
+			}
 			
 			
 		}		
 		
 		//loop through each family and check for each problem that can occur in a family (Katelyn: I don't think we should loop through the families if we look back at the data structure file I came up with we don't have to)
 		
-		
+		for(String fam: familyIndex.keySet())
+		{
+			if(pf.futureDateFam(familyIndex.get(fam)))
+			{
+				pl.add(new Error(familyIndex.get(fam).getLineNumber(), "Family " + familyIndex.get(fam).getID() + " has a date listed in the future associated with it."));
+			}
+		}
 		
 		return pl;
 	}

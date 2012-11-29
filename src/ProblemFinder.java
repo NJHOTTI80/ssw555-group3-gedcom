@@ -1,8 +1,11 @@
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.Vector;
 
 //Evaluates whether there is an issue with a given family or individual
@@ -164,6 +167,26 @@ public class ProblemFinder {
 				}
 			}
 		}
+		return false;
+	}
+
+	public boolean futureDateFam(Family family) {
+		GregorianCalendar today = new GregorianCalendar(TimeZone.getTimeZone("EST"), Locale.US);
+		today.setTime(new Date());
+		if(family.getMD()!= null)
+			if(family.getMD().after(today))
+				return true;
+		if(family.getDD()!= null)
+			if(family.getDD().after(today))
+				return true;
+		return false;
+	}
+
+	public boolean futureDateInd(Individual person) {
+		GregorianCalendar today = new GregorianCalendar(TimeZone.getTimeZone("EST"), Locale.US);
+		today.setTime(new Date());
+		if(person.getBirthDate().after(today) || (!person.getDeathDates().isEmpty() && person.getDeathDates().get(0).after(today)))
+			return true;
 		return false;
 	}
 	
