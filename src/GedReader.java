@@ -121,7 +121,7 @@ public class GedReader {
 			
 			if(pf.isThereNoDivorceRecordForDeadSpuse(personIndex.get(s)))
 			{
-				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " had no divroce record from their spouse even though they are dead"));
+				pl.add(new Error(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " had no divorce record from their spouse even though they are dead"));
 			}
 			
 		}		
