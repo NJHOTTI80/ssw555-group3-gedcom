@@ -96,7 +96,7 @@ public class GedReader {
 				pl.add( new Anomaly( personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to more than 1 indivudal at a time."));
 			}
 			
-			if(pf.isMarriedToSibling(familyIndex, personIndex, personIndex.get(s)))
+			if(pf.isMarriedToSibling(personIndex.get(s)))
 			{
 				pl.add(new Anomaly(personIndex.get(s).getLineNumber(), "Person " + personIndex.get(s).getId() + " is married to a sibling."));
 			}

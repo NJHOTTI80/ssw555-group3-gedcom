@@ -66,6 +66,24 @@ public class ProblemFinder {
 		return false;
 	}
 	
+	public boolean isMarriedToSibling(Individual ind)
+	{
+		ArrayList<String> spouses = ind.getAllSpousesIDs(familyIndex);
+		ArrayList<String> familyIDsSpouseChildFamily = new ArrayList<String>();
+		for(String spouseID: spouses)
+		{
+			familyIDsSpouseChildFamily.addAll(personIndex.get(spouseID).getFamC());
+		}
+		Iterator<String> i = ind.getFamC().iterator();
+		while(i.hasNext())
+		{
+			if(familyIDsSpouseChildFamily.contains(i.next()))
+				return true;
+		}
+		return false;
+	}
+	
+	
 	public boolean parentMarriage(Individual i)
 	{
 		HashSet<String> marrFams = i.getFamS();

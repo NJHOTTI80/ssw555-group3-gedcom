@@ -116,23 +116,14 @@ public class Individual
 		Iterator<String> i = getFamS().iterator();
 		while(i.hasNext())
 		{
-			if(sex.equals("F"))
+			String s = i.next();
+			if(family.containsKey(s))
 			{
-				String s = i.next();
-				if ( family.containsKey(s) )
-				{
-					spouses.add(family.get(s).getHusb());
-				}
-			}
-				
-			else if(sex.equals("M"))
-			{
-				String s = i.next();
-				if ( family.containsKey(s) )
-				{
+				if(family.get(s).getHusb().equals(id))
 					spouses.add(family.get(s).getWife());
-				}
-			}
+				if(family.get(s).getWife().equals(id))
+					spouses.add(family.get(s).getHusb());
+			}			
 		}
 		
 		return spouses;
