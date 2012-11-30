@@ -46,7 +46,25 @@ public class ProblemFinder {
 	public static boolean isMarriedToMoreThanOnePerson(Hashtable<String, Family> familyIndex, 
 			Hashtable<String, Individual> indIndex, Individual i) {
 		if ( i.getFamS().size() <= 1 ) return false;
-		else return true;
+		else {
+			for ( String s : i.getFamS() ) {
+				for ( String t : i.getFamS() ) {
+					if ( !familyIndex.get(s).equals(familyIndex.get(t) )) {
+						GregorianCalendar md = familyIndex.get(s).getMD();
+						GregorianCalendar dd = familyIndex.get(t).getDD();
+						if ( dd != null ) {
+							if ( md.before( dd )) {
+								return true;
+							}
+						}
+						else {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
 	}
 
 	public static boolean isMarriedToSibling(Hashtable<String, Family> familyIndex, Hashtable<String, Individual> indIndex, Individual ind)

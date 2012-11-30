@@ -121,15 +121,14 @@ public class GedcomTest {
 		
 		
 		Hashtable<String, Individual> indTable = new Hashtable<String, Individual>();
-		indTable.put(i1.getId(), i1);
-		indTable.put(i2.getId(), i2);
-		indTable.put(i3.getId(), i3);
+
 		
 		f1.setHusb("1");
 		f1.setWife("2");
 		i1.addFamS(f1.getID());
 		i2.addFamS(f1.getID());
 		f1.setMarriage(new GregorianCalendar(2002, 6, 5));
+		f1.setMarriage(new GregorianCalendar(2012, 12, 12));
 		
 		f2.setHusb("1");
 		f2.setWife("3");
@@ -141,8 +140,11 @@ public class GedcomTest {
 		famTable.put(f1.getID(), f1);
 		famTable.put(f2.getID(), f2);
 		
+		indTable.put(i1.getId(), i1);
+		indTable.put(i2.getId(), i2);
+		indTable.put(i3.getId(), i3);
+		
 		assertTrue( ProblemFinder.isMarriedToMoreThanOnePerson(famTable, indTable, i1) );
-		//assertTrue( !ProblemFinder.isMarriedToMoreThanOnePerson(i3) );
 	}
 	
 	@Test
