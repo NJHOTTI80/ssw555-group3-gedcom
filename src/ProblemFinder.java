@@ -111,7 +111,13 @@ public class ProblemFinder {
 		//Gather all children of an individual
 		while(f.hasNext())
 		{
-			allchildren.addAll(familyIndex.get(f.next()).getChildren());	
+			String s = f.next();
+			if ( familyIndex.get(s) != null ) {
+				Vector<String> children = familyIndex.get(s).getChildren();
+				if ( children != null ) {
+					allchildren.addAll(children);
+				}
+			}
 		}
 		//For each spouse of the individual
 		for(String spouseID: spouses)
@@ -155,15 +161,17 @@ public class ProblemFinder {
 		while(famIDs.hasNext())
 		{
 			Family fam = familyIndex.get(famIDs.next());
-			if(sex.equals("M"))
-			{
-				if(fam.getWife().equals(i.getId()))
-					return true;
-			}
-			else if(sex.equals("F"))
-			{
-				if(fam.getHusb().equals(i.getId()))
-					return true;
+			if ( fam != null ) {
+				if(sex.equals("M"))
+				{
+					if(fam.getWife().equals(i.getId()))
+						return true;
+				}
+				else if(sex.equals("F"))
+				{
+					if(fam.getHusb().equals(i.getId()))
+						return true;
+				}
 			}
 		}
 		return false;
@@ -173,8 +181,10 @@ public class ProblemFinder {
 	public boolean isThereNoDivorceRecordForDeadSpuse(Individual person) {
 		if ( person.isDead() ) {
 			for ( String s : person.getFamS() ) {
-				if ( familyIndex.get(s).getDD() == null ) {
-					return true;
+				if ( familyIndex.get(s) != null ) {
+					if ( familyIndex.get(s).getDD() == null ) {
+						return true;
+					}
 				}
 			}
 		}
@@ -186,20 +196,22 @@ public class ProblemFinder {
 		for(String s: person.getFamS())
 		{
 			Family fam = familyIndex.get(s);
-			if(person.getSex().equals("M"))
-			{
-				Individual wife = personIndex.get(fam.getWife());
-				if(wife.isDead())
+			if ( fam != null ) {
+				if(person.getSex().equals("M"))
 				{
-					return wife.getDeathDates().get(0).before(fam.getMD());
+					Individual wife = personIndex.get(fam.getWife());
+					if(wife.isDead())
+					{
+						return wife.getDeathDates().get(0).before(fam.getMD());
+					}
 				}
-			}
-			else
-			{
-				Individual husb = personIndex.get(fam.getHusb());
-				if(husb.isDead())
+				else
 				{
-					return husb.getDeathDates().get(0).before(fam.getMD());
+					Individual husb = personIndex.get(fam.getHusb());
+					if(husb.isDead())
+					{
+						return husb.getDeathDates().get(0).before(fam.getMD());
+					}
 				}
 			}
 		}

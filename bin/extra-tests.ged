@@ -1,0 +1,159 @@
+0 NOTE ------------------------------
+0 NOTE This test file has several errors
+0 NOTE ------------------------------
+0 NOTE First some records without errors
+0 NOTE ------------------------------
+0 @I01@ INDI
+1 NAME Francis Albert /Sinatra/
+1 SEX M
+1 BIRT
+2 DATE 12 DEC 1915
+1 DEAT
+2 DATE 14 MAY 1998
+1 FAMS @F01@
+0 NOTE ------------------------------
+0 @I02@ INDI
+1 NAME Nancy /Barbato/
+1 SEX F
+1 BIRT
+2 DATE 25 MAR 1917
+1 FAMS @F01@
+0 NOTE ------------------------------
+0 @I03@ INDI
+1 NAME Nancy Sandra /Sinatra/
+1 SEX F
+1 BIRT
+2 DATE 8 JUN 1940
+1 FAMC @F01@
+0 NOTE ------------------------------
+0 @F01@ FAM
+0 NOTE Frank Sinatra and Nancy Barbato
+1 HUSB @I01@
+1 WIFE @I02@
+1 MARR
+2 DATE 4 FEB 1939
+1 DIV
+2 DATE 29 OCT 1951
+1 CHIL @I03@
+0 NOTE ------------------------------
+0 NOTE Error 1: Death before own Birth
+0 NOTE ------------------------------
+0 @E01@ INDI
+1 NAME Francis One /Sinatra/
+1 SEX M
+1 BIRT
+2 DATE 12 DEC 1915
+1 DEAT
+2 DATE 11 DEC 1915
+0 NOTE ------------------------------
+0 NOTE Error 2: Marriage before own Birth
+0 NOTE ------------------------------
+0 @E02@ INDI
+1 NAME Francis Two /Sinatra/
+1 SEX M
+1 BIRT
+2 DATE 12 DEC 1915
+1 DEAT
+2 DATE 14 MAY 1998
+1 FAMS @G02@
+0 NOTE ------------------------------
+0 @D02@ INDI
+1 NAME Nancy Two /Barbato/
+1 SEX F
+1 BIRT
+2 DATE 25 MAR 1917
+1 FAMS @G02@
+0 NOTE ------------------------------
+0 @G02@ FAM
+0 NOTE Frank Sinatra and Nancy Barbato
+1 HUSB @E02@
+1 WIFE @D02@
+1 MARR
+2 DATE 11 DEC 1915
+0 NOTE ------------------------------
+0 NOTE Error 3: Death before Marriage
+0 NOTE ------------------------------
+0 @E03@ INDI
+1 NAME Francis Three /Sinatra/
+1 SEX M
+1 BIRT
+2 DATE 12 DEC 1915
+1 DEAT
+2 DATE 3 FEB 1939
+1 FAMS @G03@
+0 NOTE ------------------------------
+0 @D03@ INDI
+1 NAME Nancy Three /Barbato/
+1 SEX F
+1 BIRT
+2 DATE 25 MAR 1917
+1 FAMS @G03@
+0 NOTE ------------------------------
+0 @G03@ FAM
+0 NOTE Frank Sinatra and Nancy Barbato
+1 HUSB @E03@
+1 WIFE @D03@
+1 MARR
+2 DATE 4 FEB 1939
+0 NOTE ------------------------------
+0 NOTE Error 4: Death before birth of parents
+0 NOTE ------------------------------
+0 @E04@ INDI
+1 NAME Francis Four /Sinatra/
+1 SEX M
+1 BIRT
+2 DATE 12 DEC 1915
+1 DEAT
+2 DATE 14 MAY 1998
+1 FAMS @G04@
+0 NOTE ------------------------------
+0 @D04@ INDI
+1 NAME Nancy Four /Barbato/
+1 SEX F
+1 BIRT
+2 DATE 25 MAR 1917
+1 FAMS @G04@
+0 NOTE ------------------------------
+0 @C04@ INDI
+1 NAME Nancy Four /Sinatra/
+1 SEX F
+1 BIRT
+2 DATE 1 JAN 1900
+1 DEAT
+2 DATE 11 DEC 1915
+1 FAMC @G04@
+0 NOTE ------------------------------
+0 @G04@ FAM
+0 NOTE Frank Sinatra and Barbara Marx
+1 HUSB @E04@
+1 WIFE @D04@
+1 MARR
+2 DATE 4 FEB 1939
+1 CHIL @C04@
+0 NOTE ------------------------------
+0 NOTE Error 5: HUSB in family but SEX = F
+0 NOTE Error 6: WIFE in family but SEX = M
+0 NOTE ------------------------------
+0 @E05@ INDI
+1 NAME Francis Five /Sinatra/
+1 SEX M
+1 BIRT
+2 DATE 12 DEC 1915
+1 DEAT
+2 DATE 14 MAY 1998
+1 FAMS @G05@
+0 NOTE ------------------------------
+0 @D05@ INDI
+1 NAME Nancy Five /Barbato/
+1 SEX F
+1 BIRT
+2 DATE 25 MAR 1917
+1 FAMS @G05@
+0 NOTE ------------------------------
+0 @G05@ FAM
+0 NOTE Frank Sinatra and Barbara Marx
+1 WIFE @E05@
+1 HUSB @D05@
+1 MARR
+2 DATE 4 FEB 1939
+0 NOTE ------------------------------
